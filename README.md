@@ -1,3 +1,5 @@
+This is fork of [jumbojett/openid-connect-php](https://github.com/jumbojett/OpenID-Connect-PHP)
+
 PHP OpenID Connect Basic Client
 ========================
 A simple library that allows an application to authenticate a user through the basic OpenID Connect flow.
@@ -40,9 +42,9 @@ $name = $oidc->requestUserInfo('given_name');
 ## Example 2: Dynamic Registration ##
 
 ```php
-use Jumbojett\OpenIDConnectClient;
+use WannaBaPro\OpenIDConnect;
 
-$oidc = new OpenIDConnectClient("https://id.provider.com");
+$oidc = new Client("https://id.provider.com");
 
 $oidc->register();
 $client_id = $oidc->getClientID();
@@ -63,9 +65,9 @@ $oidc->setCertPath("/path/to/my.cert");
 ## Example 4: Request Client Credentials Token ##
 
 ```php
-use Jumbojett\OpenIDConnectClient;
+use WannaBaPro\OpenIDConnect;
 
-$oidc = new OpenIDConnectClient('https://id.provider.com',
+$oidc = new Client('https://id.provider.com',
                                 'ClientIDHere',
                                 'ClientSecretHere');
 $oidc->providerConfigParam(array('token_endpoint'=>'https://id.provider.com/connect/token'));
@@ -79,9 +81,9 @@ $clientCredentialsToken = $oidc->requestClientCredentialsToken()->access_token;
 ## Example 5: Request Resource Owners Token (with client auth) ##
 
 ```php
-use Jumbojett\OpenIDConnectClient;
+use WannaBaPro\OpenIDConnect;
 
-$oidc = new OpenIDConnectClient('https://id.provider.com',
+$oidc = new Client('https://id.provider.com',
                                 'ClientIDHere',
                                 'ClientSecretHere');
 $oidc->providerConfigParam(array('token_endpoint'=>'https://id.provider.com/connect/token'));
@@ -99,9 +101,9 @@ $token = $oidc->requestResourceOwnerToken(TRUE)->access_token;
 ## Example 6: Basic client for implicit flow e.g. with Azure AD B2C (see http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth) ##
 
 ```php
-use Jumbojett\OpenIDConnectClient;
+use WannaBaPro\OpenIDConnect;
 
-$oidc = new OpenIDConnectClient('https://id.provider.com',
+$oidc = new Client('https://id.provider.com',
                                 'ClientIDHere',
                                 'ClientSecretHere');
 $oidc->setResponseTypes(array('id_token'));
@@ -117,9 +119,9 @@ $sub = $oidc->getVerifiedClaims('sub');
 ## Example 7: Introspection of an access token (see https://tools.ietf.org/html/rfc7662) ##
 
 ```php
-use Jumbojett\OpenIDConnectClient;
+use WannaBaPro\OpenIDConnect;
 
-$oidc = new OpenIDConnectClient('https://id.provider.com',
+$oidc = new Client('https://id.provider.com',
                                 'ClientIDHere',
                                 'ClientSecretHere');
 $data = $oidc->introspectToken('an.access-token.as.given');
