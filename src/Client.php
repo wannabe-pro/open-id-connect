@@ -1010,17 +1010,14 @@ class Client
      * @return mixed
      * @throws ClientException
      */
-    protected function fetchURL($url, $postBody = null, $headers = [], $method = 'POST')
+    protected function fetchURL($url, $postBody = null, $headers = [], $method = 'GET')
     {
         // OK cool - then let's create a new cURL resource handle
         $ch = curl_init();
-
-        // Determine whether this is a GET or POST
+        
+        // Determine whether this is a method
         if ($postBody !== null) {
-            // curl_setopt($ch, CURLOPT_POST, 1);
-            // Alows to keep the POST method even after redirect
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, empty($method) ? 'POST' : $method);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postBody);
 
             // Default content type is form encoded
@@ -1034,6 +1031,8 @@ class Client
             // Add POST-specific headers
             $headers[] = 'Content-Type: ' . $content_type;
             $headers[] = 'Content-Length: ' . strlen($postBody);
+        } else if (! empty($method)) {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
         }
 
         // If we set some headers include them
