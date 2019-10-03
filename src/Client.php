@@ -1010,7 +1010,7 @@ class Client
      * @return mixed
      * @throws ClientException
      */
-    protected function fetchURL($url, $postBody = null, $headers = [], $method = 'GET')
+    protected function fetchURL($url, $postBody = null, $headers = [], $method = '')
     {
         // OK cool - then let's create a new cURL resource handle
         $ch = curl_init();
