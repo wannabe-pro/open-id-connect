@@ -489,7 +489,7 @@ class Client
         }
 
         // Other-wise return the URL of the current page
-        throw new ClientException('Get off this shit');
+        throw new ClientException('Invalid redirect URL');
     }
 
     /**
